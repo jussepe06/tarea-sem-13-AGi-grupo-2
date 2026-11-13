@@ -3,7 +3,7 @@
 **Curso:** Agentes Inteligentes / Redes Neuronales Artificiales  
 **Grupo:** Grupo 2  
 **Dataset:** `diabetes_data_es_GOLD.csv` (520 pacientes × 17 columnas; 16 features clínicos + variable objetivo `TieneDiabetes`)  
-**URL Pública de Despliegue (Streamlit Cloud):** `https://[TU-USUARIO]-diabetes-rna.streamlit.app` *(Reemplazar tras desplegar en share.streamlit.io)*
+**URL Pública de Despliegue (Streamlit Cloud):** `https://diabetin.streamlit.app/`
 
 ---
 
@@ -151,7 +151,7 @@ Se desarrolló la interfaz clínica interactiva en `app.py` utilizando `@st.cach
 - **Inferencia en tiempo real:** Transforma el vector de 16 entradas con `scaler.transform()`, calcula la probabilidad sigmoide con `modelo.predict(x)` y despliega una alerta roja (`st.error`) cuando `prob >= 0.5` o verde (`st.success`) cuando `prob < 0.5`, acompañada de barra de progreso (`st.progress(prob)`) y advertencia ética médica.
 
 ### 6.2 Capturas de la Aplicación Web y Despliegue
-- **URL Pública en Streamlit Cloud:** `https://[TU-USUARIO]-diabetes-rna.streamlit.app`
+- **URL Pública en Streamlit Cloud:** `https://diabetin.streamlit.app/`
 
 > **[INSERTAR AQUÍ CAPTURA 1: predicción de RIESGO BAJO (< 50%) en Streamlit]**
 

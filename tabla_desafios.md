@@ -3,16 +3,16 @@
 | Desafío | Variante / Configuración | Train / Val Acc | Test Acc | F1-Score | ROC-AUC | Observación Técnica |
 | --- | --- | --- | --- | --- | --- | --- |
 | Base | RNA Base [32, 16] (split 80/20) | 0.9858 / 0.9683 | 0.9615 (96.15%) | 0.9683 | 0.9988 | Convergencia estable (mejor época 98/100) con Dropout regulando el sobreajuste. |
-| Base | GBT Base (n=100, lr=0.1, depth=5, split 80/20) | 1.0000 / N/A | 0.9904 (99.04%) | 0.9921 | 1.0000 | Mayor capacidad en datos tabulares binarios (281.4 ms); captura interacciones discretas exactas. |
+| Base | GBT Base (n=100, lr=0.1, depth=5, split 80/20) | 1.0000 / N/A | 0.9904 (99.04%) | 0.9921 | 1.0000 | Mayor capacidad en datos tabulares binarios (411.4 ms); captura interacciones discretas exactas. |
 | Desafío 1 (Capas ocultas) | Variante 1a: RNA [64, 32, 16] | 0.9915 / 0.9683 | 0.9712 (97.12%) | 0.9764 | 0.9988 | Parámetros=3,713; ΔAcc=+0.96% vs Base. Aumentar profundidad mejora ligeramente o mantiene capacidad sin mejorar el límite tabular. |
 | Desafío 1 (Capas ocultas) | Variante 1b: RNA [128, 64, 32, 16] | 0.9858 / 0.9683 | 0.9808 (98.08%) | 0.9844 | 0.9992 | Parámetros=13,057; ΔAcc=+1.92% vs Base. Aumentar profundidad mejora ligeramente o mantiene capacidad sin mejorar el límite tabular. |
 | Desafío 2 (Partición extrema) | Variante 2a: Split 50/50 (test_size=0.50) | 0.9321 / 0.9231 | 0.9154 (91.54%) | 0.9295 | 0.9729 | Train=260 / Test=260. Con menos datos de entrenamiento (260 filas) cae el rendimiento por menor cobertura muestral. |
 | Desafío 2 (Partición extrema) | Variante 2b: Split 95/5 (test_size=0.05) | 0.9714 / 0.9733 | 1.0000 (100.00%) | 1.0000 | 1.0000 | Train=494 / Test=26. Aunque entrena con 494 filas, evaluar sobre solo 26 muestras tiene alta varianza estadística (±3.8% por muestra). |
-| Desafío 3 (Árboles GBT) | GBT n_estimators=10 | 0.9808 / N/A | 0.9808 (98.08%) | 0.9841 | 0.9891 | Tiempo: 22.7 ms. Sub-ajuste (underfitting): 10 árboles no bastan para reducir el residuo. |
-| Desafío 3 (Árboles GBT) | GBT n_estimators=50 | 1.0000 / N/A | 0.9904 (99.04%) | 0.9921 | 0.9992 | Tiempo: 116.6 ms. Buen compromiso velocidad/precisión; captura la mayoría de patrones. |
-| Desafío 3 (Árboles GBT) | GBT n_estimators=100 | 1.0000 / N/A | 0.9904 (99.04%) | 0.9921 | 1.0000 | Tiempo: 231.5 ms. Punto óptimo base: exactitud máxima en train (1.00) y excelente generalización. |
-| Desafío 3 (Árboles GBT) | GBT n_estimators=200 | 1.0000 / N/A | 0.9808 (98.08%) | 0.9841 | 1.0000 | Tiempo: 472.7 ms. Rendimientos decrecientes: el costo computacional crece linealmente sin ganancia adicional en test. |
-| Desafío 3 (Árboles GBT) | GBT n_estimators=500 | 1.0000 / N/A | 0.9808 (98.08%) | 0.9841 | 1.0000 | Tiempo: 870.0 ms. Rendimientos decrecientes: el costo computacional crece linealmente sin ganancia adicional en test. |
+| Desafío 3 (Árboles GBT) | GBT n_estimators=10 | 0.9808 / N/A | 0.9808 (98.08%) | 0.9841 | 0.9891 | Tiempo: 42.9 ms. Sub-ajuste (underfitting): 10 árboles no bastan para reducir el residuo. |
+| Desafío 3 (Árboles GBT) | GBT n_estimators=50 | 1.0000 / N/A | 0.9904 (99.04%) | 0.9921 | 0.9992 | Tiempo: 267.4 ms. Buen compromiso velocidad/precisión; captura la mayoría de patrones. |
+| Desafío 3 (Árboles GBT) | GBT n_estimators=100 | 1.0000 / N/A | 0.9904 (99.04%) | 0.9921 | 1.0000 | Tiempo: 548.6 ms. Punto óptimo base: exactitud máxima en train (1.00) y excelente generalización. |
+| Desafío 3 (Árboles GBT) | GBT n_estimators=200 | 1.0000 / N/A | 0.9808 (98.08%) | 0.9841 | 1.0000 | Tiempo: 1090.5 ms. Rendimientos decrecientes: el costo computacional crece linealmente sin ganancia adicional en test. |
+| Desafío 3 (Árboles GBT) | GBT n_estimators=500 | 1.0000 / N/A | 0.9808 (98.08%) | 0.9841 | 1.0000 | Tiempo: 1782.3 ms. Rendimientos decrecientes: el costo computacional crece linealmente sin ganancia adicional en test. |
 | Desafío 4 (Learning Rate GBT) | GBT learning_rate=0.001 | 0.6154 / N/A | 0.6154 (61.54%) | 0.7619 | 0.9910 | Convergencia demasiado lenta para 100 árboles; predice cercano a la clase mayoritaria/umbrales básicos. |
 | Desafío 4 (Learning Rate GBT) | GBT learning_rate=0.01 | 0.9808 / N/A | 0.9808 (98.08%) | 0.9841 | 0.9891 | Aprendizaje conservador; requiere más árboles (>300) para alcanzar el óptimo. |
 | Desafío 4 (Learning Rate GBT) | GBT learning_rate=0.1 | 1.0000 / N/A | 0.9904 (99.04%) | 0.9921 | 1.0000 | Tasa de aprendizaje óptima estándar con regularización implícita adecuada. |
